@@ -22,3 +22,16 @@ after_success:
   - docker push kojinaka/multi-nginx
   - docker push kojinaka/multi-server
   - docker push kojinaka/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-west-2-185833818651
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+      secure: $AWS_SECRET_KEY
